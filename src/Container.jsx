@@ -4,15 +4,12 @@ import Textarea from './Textarea'
 
 export default function Container() {
   const [text, setText] = useState('')
-  const numberOfWord = text.split(/\s/).filter((word) => word !== '').length
-  const numberOfCharacters = text.length
-  const twitterCharactersLeft = 280 - text.length
-  const linkedinCharactersLeft = 125000 - text.length
+
   const stats = {
-    numberOfWord,
-    numberOfCharacters,
-    twitterCharactersLeft,
-    linkedinCharactersLeft,
+    numberOfWord: text.split(/\s/).filter((word) => word !== '').length,
+    numberOfCharacters: text.length,
+    twitterCharactersLeft: 280 - text.length,
+    linkedinCharactersLeft: 125000 - text.length,
   }
   return (
     <main className='container'>
