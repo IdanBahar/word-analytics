@@ -1,22 +1,22 @@
 import { useState } from 'react'
 import Warning from './Warning'
 
-export default function Textarea() {
-  const [text, setText] = useState('')
-  const [showWarning, setShowWarning] = useState(false)
+export default function Textarea({ text, setText }) {
   const [warningText, setWarningText] = useState('')
 
+  // console.log('numberOfCharacters:', numberOfCharacters)
   function handleChange(e) {
     let newText = e.target.value
 
+    // basic validation
     if (newText.includes('<script>')) {
-      setShowWarning(true)
       setWarningText('No Script tag allowed!')
       newText = newText.replace('<script>', '')
     } else if (newText.includes('@')) {
-      setShowWarning(true)
       setWarningText('No @ allowed!')
       newText = newText.replace('@', '')
+    } else {
+      setWarningText('')
     }
     setText(newText)
   }
@@ -29,7 +29,7 @@ export default function Textarea() {
         placeholder='Enter your text'
         spellCheck='false'
       />
-      {showWarning && <Warning warning={warningText} />}
+      {warningText && <Warning warning={warningText} />}
     </div>
   )
 }
